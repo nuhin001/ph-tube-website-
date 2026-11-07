@@ -1,0 +1,8 @@
+{
+  "name": "ph-tube-mock-api-v2",
+  "version": "2.0.0",
+  "description": "Local mock API for the Programming Hero PH-Tube practice project",
+  "main": "server.js",
+  "scripts": {"start": "node server.js", "dev": "node server.js"},
+  "dependencies": {"cors": "^2.8.5", "express": "^4.21.2"}
+}
