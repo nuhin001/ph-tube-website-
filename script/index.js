@@ -70,21 +70,39 @@ const displayVideos = (videos) => {
     // create element in the for each lopp
     const videoCard = document.createElement("div");
     videoCard.innerHTML = `
-    <div class="card bg-base-100  shadow-sm">
-  <figure>
-    <img
-      src= ${video.thumbnail}
-      alt="" />
-  </figure>
-  <div class="card-body">
-    <h2 class="card-title">${video.title}</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary">Buy Now</button>
-    </div>
-  </div>
-</div>
+    <div class="card bg-base-100 ">
+        <figure class="relative">
+          <img class = "rounded"
+            src= ${video.thumbnail}
+            alt=""
+          />
+          <span
+            class="absolute bottom-2 right-2 text-sm text-[#FFFFFF] bg-black p-1 rounded"
+            >3hrs 56 min ago</span
+          >
+        </figure>
+        <div class=" flex gap-3 px-1 py-6">
+          <div class="profile">
+            <div class="avatar">
+              <div
+                class="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2"
+              >
+                <img
+                  alt="Tailwind-CSS-Avatar-component"
+                  src=${video.authors[0].profile_picture}
+                />
+              </div>
+            </div>
+          </div>
+          <div class="intro">
+            <h2 class="font-bold text-base">Building a Winning UX Strategy Using the Kano Model</h2>
+            <p class=" font-normal text-sm text-gray-600 flex gap-1">${video.authors[0].name}
+                <img class="w-5 h-5" src="https://img.icons8.com/?size=96&id=QMxOVe0B9VzG&format=png" alt="" srcset=""></p>
+                <p class="font-normal text-sm text-gray-600">${video.others.views}</p>
+          </div>
 
+        </div>
+      </div>
     `;
     // appned
     videoContainer.append(videoCard);
