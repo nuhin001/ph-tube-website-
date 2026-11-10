@@ -10,6 +10,13 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+      .active{
+        background-color: red;
+        color: white;
+      }
+    </style>
   </head>
 
   <body>
@@ -36,9 +43,9 @@
       </nav>
     </header>
 
-    <nav id="catagory-container" class="flex justify-center gap-6 py-8">
+    <nav id="category-container" class="flex justify-center gap-6 py-8">
       <div>
-        <button class="btn btn-sm bg-red-600 text-[#FFFFFF]">All</button>
+        <button onclick="loadVideos()" class="btn btn-sm bg-red-600 text-[#FFFFFF]">All</button>
       </div>
     </nav>
 
@@ -46,7 +53,12 @@
       id="video-container"
       class="w-11/12 mx-auto grid grid-cols-4 gap-2"
     >
-      <div class="card bg-base-100 ">
+    <div class="col-span-full text-center flex flex-col  items-center py-20">
+      <img class="w-[140px]" src="assests/Icon.png" alt="" srcset="">
+      <h2 class="font-bold text-3xl">Oops!! Sorry, There is no content here</h2>
+    </div>
+
+      <!-- <div class="card bg-base-100 ">
         <figure class="relative">
           <img
             src="https://fastly.picsum.photos/id/1011/640/360.jpg?hmac=ciD6n-E12slh55E4-8KMjN9T6JF-O1H_OAJBbEFJ5u0"
@@ -78,7 +90,7 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
     </section>
 
     <script src="script/index.js"></script>

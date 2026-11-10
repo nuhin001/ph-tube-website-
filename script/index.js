@@ -14,6 +14,21 @@ function loadVideos() {
     .then((res) => displayVideos(res.data)); // videos
 }
 
+
+const  loadCategoriesVideoDetails = (id) => {
+
+  const url= `http://localhost:5001/api/phero-tube/category/${id}`
+  console.log(url);
+
+  fetch(url)
+  .then(res =>res.json())
+  .then(res =>{
+    const clickButton = document.getElementById(`btn-${id}`)
+    clickButton.classList.add("active");
+    console.log(clickButton);
+    displayVideos(res.data)})
+}
+
 // {
 //     "category_id": "1001",
 //     "category": "Music"
@@ -43,7 +58,7 @@ function displayCategories(categories) {
   // console.log(categories); //working
 
   //get the container
-  const categoryContainer = document.getElementById("catagory-container");
+  const categoryContainer = document.getElementById("category-container");
 
   //loop operation on Array of object
   for (let cat of categories) {
@@ -52,7 +67,7 @@ function displayCategories(categories) {
     //create element
     const categoryDiv = document.createElement("div");
     categoryDiv.innerHTML = `
-    <button class="btn btn-sm hover:bg-red-600 hover:text-[#FFFFFF] ">${cat.category}</button>
+    <button id= btn-${cat.category_id} onclick="loadCategoriesVideoDetails(${cat.category_id})" class="btn btn-sm  hover:bg-red-600 hover:text-[#FFFFFF] ">${cat.category}</button>
     `;
 
     //Append
@@ -63,6 +78,18 @@ function displayCategories(categories) {
 const displayVideos = (videos) => {
   // console.log(videos);
   const videoContainer = document.getElementById("video-container");
+  videoContainer.innerHTML = "";
+
+  //if any array length is "0" this condition will apply
+  if(videos.length == 0){
+    videoContainer.innerHTML = ` 
+     <div class="col-span-full text-center flex flex-col  items-center py-20">
+      <img class="w-[140px]" src="assests/Icon.png" alt="" srcset="">
+      <h2 class="font-bold text-3xl">Oops!! Sorry, There is no content here</h2>
+    </div>
+    `
+    return;
+  }
 
   // for each loop
   videos.forEach((video) => {
@@ -110,4 +137,4 @@ const displayVideos = (videos) => {
 };
 
 loadCategories();
-loadVideos();
+// loadVideos();
