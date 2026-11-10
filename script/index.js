@@ -1,5 +1,15 @@
 console.log("index is connected");
 
+// removeing  active class
+function removeActiveClass(){
+  const activeButtons = document.getElementsByClassName("active");
+  console.log(activeButtons);
+
+  for( let btn of activeButtons){
+    btn.classList.remove("active");
+  }
+}
+
 function loadCategories() {
   // console.log("categories is loading");
   // fetch the data
@@ -11,10 +21,14 @@ function loadCategories() {
 function loadVideos() {
   fetch("http://localhost:5001/api/phero-tube/videos")
     .then((res) => res.json())
-    .then((res) => displayVideos(res.data)); // videos
+    .then((res) => {
+      displayVideos(res.data)
+
+      removeActiveClass();
+      document.getElementById("btn-all").classList.add("active"); //active class button
+    }); // videos
 }
-
-
+//        it is the category_id :1001 starting point
 const  loadCategoriesVideoDetails = (id) => {
 
   const url= `http://localhost:5001/api/phero-tube/category/${id}`
@@ -23,9 +37,13 @@ const  loadCategoriesVideoDetails = (id) => {
   fetch(url)
   .then(res =>res.json())
   .then(res =>{
+
+    removeActiveClass(); //<- remove active class in the button 
+    
+     // calling buttons with active class
     const clickButton = document.getElementById(`btn-${id}`)
     clickButton.classList.add("active");
-    console.log(clickButton);
+    // console.log(clickButton);
     displayVideos(res.data)})
 }
 
@@ -93,7 +111,7 @@ const displayVideos = (videos) => {
 
   // for each loop
   videos.forEach((video) => {
-    console.log(video);
+    // console.log(video);
     // create element in the for each lopp
     const videoCard = document.createElement("div");
     videoCard.innerHTML = `
