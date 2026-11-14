@@ -155,7 +155,7 @@ const displayVideos = (videos) => {
                 <p class="font-normal text-sm text-gray-600">${video.others.views}</p>
           </div>
 
-        </div>  
+        </div class = pt-2>  
         <button onclick=loadvideoDetails('${video.video_id}') class="btn btn-block">Show Details</button>
       </div>
     `;
