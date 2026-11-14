@@ -24,7 +24,7 @@ function loadVideos() {
     .then((res) => {
       displayVideos(res.data)
 
-      removeActiveClass();
+      removeActiveClass(); // all button is first inactive in my (default) system
       document.getElementById("btn-all").classList.add("active"); //active class button
     }); // videos
 }
@@ -39,7 +39,7 @@ const  loadCategoriesVideoDetails = (id) => {
   .then(res =>{
 
     removeActiveClass(); //<- remove active class in the button 
-    
+
      // calling buttons with active class
     const clickButton = document.getElementById(`btn-${id}`)
     clickButton.classList.add("active");
@@ -116,10 +116,11 @@ const displayVideos = (videos) => {
     const videoCard = document.createElement("div");
     videoCard.innerHTML = `
     <div class="card bg-base-100 ">
-        <figure class="relative">
-          <img class = "rounded"
-            src= ${video.thumbnail}
+        <figure class="relative w-full aspect-video overflow-hidden rounded">
+          <img class = "w-full h-full object-cover"
+            src= ${video.thumbnail};
             alt=""
+            
           />
           <span
             class="absolute bottom-2 right-2 text-sm text-[#FFFFFF] bg-black p-1 rounded"
@@ -140,7 +141,7 @@ const displayVideos = (videos) => {
             </div>
           </div>
           <div class="intro">
-            <h2 class="font-bold text-base">Building a Winning UX Strategy Using the Kano Model</h2>
+            <h2 class="font-bold text-base">${video.title}</h2>
             <p class=" font-normal text-sm text-gray-600 flex gap-1">${video.authors[0].name}
                 <img class="w-5 h-5" src="https://img.icons8.com/?size=96&id=QMxOVe0B9VzG&format=png" alt="" srcset=""></p>
                 <p class="font-normal text-sm text-gray-600">${video.others.views}</p>
