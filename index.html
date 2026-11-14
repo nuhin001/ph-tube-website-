@@ -1,65 +1,52 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PH-Tube</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/daisyui@5"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <style>
-      .active{
-        background-color: red;
-        color: white;
-      }
-    </style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PH-Tube</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-  </head>
+  <style>
+    .active {
+      background-color: red;
+      color: white;
+    }
+  </style>
 
-  <body>
-    <header>
-      <nav
-        class="w-11/12 mx-auto flex justify-between items-center py-10 border-b-2 border-gray-400"
-      >
-        <img
-          class="object-contain w-[150px]"
-          src="assests/Logo.png"
-          alt=""
-          srcset=""
-        />
-        <div class="shot">
-          <button class="btn bg-gray-300 font-medium text-lg text-[#252525]">
-            Sort by view
-          </button>
-        </div>
-        <div class="blog">
-          <button class="btn bg-red-600 font-medium text-lg text-[#FFFFFF]">
-            Blogs
-          </button>
-        </div>
-      </nav>
-    </header>
+</head>
 
-    <nav id="category-container" class="flex justify-center gap-6 py-8">
-      <div>
-        <button id="btn-all" onclick="loadVideos()" class="btn btn-sm ">All</button>
+<body>
+  <header>
+    <nav class="w-11/12 mx-auto flex justify-between items-center py-10 border-b-2 border-gray-400">
+      <img class="object-contain w-[150px]" src="assests/Logo.png" alt="" srcset="" />
+      <div class="shot">
+        <button class="btn bg-gray-300 font-medium text-lg text-[#252525]">
+          Sort by view
+        </button>
+      </div>
+      <div class="blog">
+        <button class="btn bg-red-600 font-medium text-lg text-[#FFFFFF]">
+          Blogs
+        </button>
       </div>
     </nav>
+  </header>
 
-    <section
-      id="video-container"
-      class="w-11/12 mx-auto grid grid-cols-4 gap-2"
-    >
+  <nav id="category-container" class="flex justify-center gap-6 py-8">
+    <div>
+      <button id="btn-all" onclick="loadVideos()" class="btn btn-sm ">All</button>
+    </div>
+  </nav>
+
+  <section id="video-container" class="w-11/12 mx-auto grid grid-cols-4 gap-2">
     <div class="col-span-full text-center flex flex-col  items-center py-20">
       <img class="w-[140px]" src="assests/Icon.png" alt="" srcset="">
       <h2 class="font-bold text-3xl">Oops!! Sorry, The content's will be seen after clicking the buttons</h2>
     </div>
 
-      <!-- <div class="card bg-base-100 ">
+    <!-- <div class="card bg-base-100 ">
         <figure class="relative">
           <img
             src="https://fastly.picsum.photos/id/1011/640/360.jpg?hmac=ciD6n-E12slh55E4-8KMjN9T6JF-O1H_OAJBbEFJ5u0"
@@ -92,8 +79,27 @@
 
         </div>
       </div> -->
-    </section>
+  </section>
 
-    <script src="script/index.js"></script>
-  </body>
+  <!-- Open the modal using ID.showModal() method -->
+  <button class="btn" onclick="my_modal_1.showModal()">open modal</button>
+  <!-- when we give a id to a modal we use _ (underscore) example : video_details -->
+  <dialog id="video_details" class="modal">
+    <div class="modal-box">
+
+      <div id="details-container"></div>
+
+      <!-- <h3 class="text-lg font-bold">Hello!</h3>
+      <p class="py-4">Press ESC key or click the button below to close</p> -->
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script/index.js"></script>
+</body>
 </html>

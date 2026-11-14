@@ -1,11 +1,11 @@
 console.log("index is connected");
 
 // removeing  active class
-function removeActiveClass(){
+function removeActiveClass() {
   const activeButtons = document.getElementsByClassName("active");
   console.log(activeButtons);
 
-  for( let btn of activeButtons){
+  for (let btn of activeButtons) {
     btn.classList.remove("active");
   }
 }
@@ -22,30 +22,37 @@ function loadVideos() {
   fetch("http://localhost:5001/api/phero-tube/videos")
     .then((res) => res.json())
     .then((res) => {
-      displayVideos(res.data)
+      displayVideos(res.data);
 
       removeActiveClass(); // all button is first inactive in my (default) system
       document.getElementById("btn-all").classList.add("active"); //active class button
     }); // videos
 }
 //        it is the category_id :1001 starting point
-const  loadCategoriesVideoDetails = (id) => {
-
-  const url= `http://localhost:5001/api/phero-tube/category/${id}`
+const loadCategoriesVideoDetails = (id) => {
+  const url = `http://localhost:5001/api/phero-tube/category/${id}`;
   console.log(url);
 
   fetch(url)
-  .then(res =>res.json())
-  .then(res =>{
+    .then((res) => res.json())
+    .then((res) => {
+      removeActiveClass(); //<- remove active class in the button
 
-    removeActiveClass(); //<- remove active class in the button 
+      // calling buttons with active class
+      const clickButton = document.getElementById(`btn-${id}`);
+      clickButton.classList.add("active");
+      // console.log(clickButton);
+      displayVideos(res.data);
+    });
+};
 
-     // calling buttons with active class
-    const clickButton = document.getElementById(`btn-${id}`)
-    clickButton.classList.add("active");
-    // console.log(clickButton);
-    displayVideos(res.data)})
-}
+const loadvideoDetails = (videoId) => {
+  console.log(videoId); // for calling the video id // it's need '' to call because it is video001 is string
+  const url = `http://localhost:5001/api/phero-tube/video/${videoId}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((res) => displayvideoDetails(res.data));
+};
 
 // {
 //     "category_id": "1001",
@@ -72,6 +79,7 @@ const  loadCategoriesVideoDetails = (id) => {
 // }
 
 // how to display categories with normal function
+
 function displayCategories(categories) {
   // console.log(categories); //working
 
@@ -99,13 +107,13 @@ const displayVideos = (videos) => {
   videoContainer.innerHTML = "";
 
   //if any array length is "0" this condition will apply
-  if(videos.length == 0){
+  if (videos.length == 0) {
     videoContainer.innerHTML = ` 
      <div class="col-span-full text-center flex flex-col  items-center py-20">
       <img class="w-[140px]" src="assests/Icon.png" alt="" srcset="">
       <h2 class="font-bold text-3xl">Oops!! Sorry, There is no content here</h2>
     </div>
-    `
+    `;
     return;
   }
 
@@ -147,7 +155,8 @@ const displayVideos = (videos) => {
                 <p class="font-normal text-sm text-gray-600">${video.others.views}</p>
           </div>
 
-        </div>
+        </div>  
+        <button onclick=loadvideoDetails('${video.video_id}') class="btn btn-block">Show Details</button>
       </div>
     `;
     // appned
@@ -155,5 +164,27 @@ const displayVideos = (videos) => {
   });
 };
 
+const displayvideoDetails = (video) => {
+  console.log(video);
+  document.getElementById("video_details").showModal();
+  const detailsContainer = document.getElementById("details-container");
+
+  detailsContainer.innerHTML = `
+  <div class="card bg-base-100 image-full  shadow-sm ">
+  <figure>
+    <img class= "w-full h-full object-cover"
+      src=${video.thumbnail}
+      alt="Shoes" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">${video.title}</h2>
+    <p>${video.description}</p>
+  </div>
+</div>
+  `;
+};
+
 loadCategories();
 // loadVideos();
+
+// <h2>${video.title}</h2>
